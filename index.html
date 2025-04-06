@@ -18,6 +18,11 @@
         box-sizing: border-box;
       }
 
+      html {
+        scroll-padding-top: 5rem;
+        scroll-padding-bottom: 5rem;
+      }
+
       html, body {
         width: 100%;
         max-width: 100vw;
@@ -29,8 +34,8 @@
       body {
         font-family: "Source Sans 3", sans-serif;
         text-align: left;
-        padding-top: 3.6rem;
-        padding-bottom: 3.6rem;
+        padding-top: 3rem;
+        padding-bottom: 3rem;
         padding-left: 1rem;
         padding-right: 1rem;
         background-color: #000000;
@@ -46,10 +51,22 @@
         height: 4.2rem;
         z-index: 1000;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         border-bottom: none;
         animation: none;
+      }
+
+      .title-button {
+        background-color: #ffffff;
+        color: #000000;
+        border: none;
+        padding: 0.4rem 0.9rem;
+        border-radius: 20px;
+        cursor: pointer;
+        font-family: "Source Sans 3", sans-serif;
+        font-size: 1rem;
+        transition: background-color 0.3s, color 0.3s;
       }
 
       .fixed-footer-box {
@@ -64,7 +81,7 @@
         justify-content: center;
         align-items: center;
         padding: 0 1rem;
-        gap: 1.1rem;
+        gap: 1.5rem;
         border-top: none;
         animation: none;
       }
@@ -91,7 +108,8 @@
         color: #ffffff;
         margin: 0;
         text-align: center;
-        font-weight: 800;
+        font-weight: 700;
+        flex-grow: 1;
       }
 
       p {
@@ -115,10 +133,11 @@
         padding: 1rem;
         border-radius: 1rem;
         box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
-        margin-bottom: 1.5rem;
+        margin: 2.5rem auto;
         width: 100%;
-        margin: 1rem auto;
+        max-width: 850px;
         color: #ffffff;
+        transition: background 0.8s ease-in-out;
       }
     </style>
 
@@ -133,105 +152,101 @@
           });
         });
 
-        // Set initial active button
-        const defaultButton = Array.from(buttons).find(btn => btn.textContent.trim() === "Run");
+        const defaultButton = Array.from(buttons).find(btn => btn.textContent.trim() === "News");
         if (defaultButton) {
           defaultButton.classList.add("active");
         }
-      });
-      document.addEventListener("DOMContentLoaded", () => {
+
         const gradients = [
-  "linear-gradient(135deg, #0d1b2a, #1b263b)",   // Deep Navy
-  "linear-gradient(135deg, #370617, #6a040f)",   // Rich Crimson
-  "linear-gradient(135deg, #1b1b2f, #53354a)",   // Grape Plum
-  "linear-gradient(135deg, #003049, #1d3557)",   // Midnight Blue
-  "linear-gradient(135deg, #14213d, #0f4c5c)",   // Inky Teal
-  "linear-gradient(135deg, #2c003e, #3c096c)",   // Dark Purple
-  "linear-gradient(135deg, #1a1a40, #1e3d59)",   // Indigo Storm
-  "linear-gradient(135deg, #00332a, #005f73)",   // Deep Sea Green
-  "linear-gradient(135deg, #2b2d42, #3f0d12)",   // Bloodstone
-  "linear-gradient(135deg, #3a0ca3, #240046)",   // Rich Royal Purple
-  "linear-gradient(135deg, #1e1e24, #4a0d67)",   // Gothic Violet
-  "linear-gradient(135deg, #002a32, #014f86)",   // Dark Cerulean
-  "linear-gradient(135deg, #420516, #720026)",   // Black Cherry
-  "linear-gradient(135deg, #0a0908, #22333b)",   // Charred Steel
-  "linear-gradient(135deg, #004643, #001e1d)",   // Jungle Depths
-  "linear-gradient(135deg, #2b0000, #660708)",   // Blood Red
-  "linear-gradient(135deg, #2d132c, #801336)",   // Berry Noir
-  "linear-gradient(135deg, #1b263b, #415a77)",   // Dim Blue Gray
-];
+          "linear-gradient(135deg, #0d1b2a, #1b263b)",
+          "linear-gradient(135deg, #370617, #6a040f)",
+          "linear-gradient(135deg, #1b1b2f, #53354a)",
+          "linear-gradient(135deg, #003049, #1d3557)",
+          "linear-gradient(135deg, #14213d, #0f4c5c)",
+          "linear-gradient(135deg, #2c003e, #3c096c)",
+          "linear-gradient(135deg, #1a1a40, #1e3d59)",
+          "linear-gradient(135deg, #00332a, #005f73)",
+          "linear-gradient(135deg, #2b2d42, #3f0d12)",
+          "linear-gradient(135deg, #3a0ca3, #240046)",
+          "linear-gradient(135deg, #1e1e24, #4a0d67)",
+          "linear-gradient(135deg, #002a32, #014f86)",
+          "linear-gradient(135deg, #420516, #720026)",
+          "linear-gradient(135deg, #0a0908, #22333b)",
+          "linear-gradient(135deg, #004643, #001e1d)",
+          "linear-gradient(135deg, #2b0000, #660708)",
+          "linear-gradient(135deg, #2d132c, #801336)",
+          "linear-gradient(135deg, #1b263b, #415a77)"
+        ];
 
+        const boxes = document.querySelectorAll(".content-box");
+        boxes.forEach(box => {
+          const randomGradient = gradients[Math.floor(Math.random() * gradients.length)];
+          box.style.background = randomGradient;
+        });
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+      const buttons = document.querySelectorAll(".fixed-title-box .title-button");
 
+        buttons.forEach((button) => {
+          button.addEventListener("click", () => {
+            button.style.backgroundColor = "#cccccc"; // Light grey
+            setTimeout(() => {
+              button.style.backgroundColor = "#ffffff"; // Original white
+            }, 150); // Flash for 150ms
+          });
+        });
+      });
 
-
-
-    const boxes = document.querySelectorAll(".content-box");
-    boxes.forEach(box => {
-      const randomGradient = gradients[Math.floor(Math.random() * gradients.length)];
-      box.style.background = randomGradient;
-    });
-  });
     </script>
   </head>
   <body>
     <div class="fixed-title-box">
       <h1>Analysis Gamma</h1>
+      <button class="title-button">Run</button>
     </div>
 
-    <!-- Each paragraph in its own content-box -->
-    <!-- Content Sections -->
     <div class="content-box">
-        <p>The MAGIC Gamma Telescope project represents a union of astrophysical instrumentation and machine learning. By leveraging classification algorithms, we aim to differentiate gamma-ray-induced atmospheric showers from background hadron showers, which often produce visually similar results. This is not only a classification problem but a scientific one, with far-reaching implications for understanding dark matter, cosmic rays, and high-energy particles from deep space.</p>
-      </div>
-      
-      <div class="content-box">
-        <p>To understand the data, it's important to recognize that each feature corresponds to physical phenomena. For example, 'width' and 'length' correlate with the spatial distribution of light, while parameters like 'skewness' and 'kurtosis' tell us about asymmetry and concentration. Understanding these physical implications allows us to approach machine learning from a more informed and intuitive perspective, which often leads to better models.</p>
-      </div>
-      
-      <div class="content-box">
-        <p>We utilized cross-validation to rigorously assess model performance. A stratified k-fold strategy ensures that each fold preserves the percentage of samples for each class. This methodology helps in estimating generalization error and reduces the risk of biased evaluation. Additionally, model stability was monitored by observing variance in metrics across folds, providing insights into potential overfitting or underfitting issues.</p>
-      </div>
-      
-      <div class="content-box">
-        <p>One of the most interesting insights was the feature importance plot derived from the Random Forest model. It revealed that a small subset of features contributes disproportionately to prediction accuracy. This discovery led to feature selection experiments, where we pruned irrelevant variables and even saw a marginal improvement in test accuracy. Less can sometimes be more, especially in noisy datasets.</p>
-      </div>
-      
-      <div class="content-box">
-        <p>We experimented with dimensionality reduction methods like PCA and t-SNE to visualize the structure of the dataset in two dimensions. The PCA plots showed partial class separability, which validated our choice to proceed with supervised learning. Meanwhile, t-SNE offered deeper insight into nonlinear groupings and confirmed that the decision boundary is complex and multidimensional.</p>
-      </div>
-      
-      <div class="content-box">
-        <p>Throughout development, we emphasized reproducibility. All code was version-controlled and pipeline steps were modularized. We used Python, Scikit-learn, Pandas, and Seaborn for exploratory data analysis and model training. Notebook outputs were exported into HTML for sharing, and the model was serialized using joblib for deployment scenarios. Our entire workflow is designed to be transparent and collaborative.</p>
-      </div>
-      
-      <div class="content-box">
-        <p>We also implemented SHAP (SHapley Additive exPlanations) to explain predictions. This is especially useful when analyzing misclassified samples—by tracing the contribution of each feature to the final prediction, we could uncover biases or unexpected interactions. SHAP visualizations added an additional layer of interpretability that is often missing in traditional black-box approaches.</p>
-      </div>
-      
-      <div class="content-box">
-        <p>The dataset was fairly balanced, but we conducted synthetic sampling experiments using SMOTE to test model robustness under imbalanced scenarios. Interestingly, the performance of ensemble classifiers remained strong, while linear models deteriorated significantly. This reinforced our preference for tree-based methods in real-world applications with non-trivial class distributions.</p>
-      </div>
-      
-      <div class="content-box">
-        <p>Each stage of this project, from data cleaning to model evaluation, was documented in a project log. This not only helped maintain clarity during development but also proved invaluable during presentations and handoffs. The log includes timestamps, rationale for decisions, and even discarded experiments—because in science, knowing what didn't work is as important as knowing what did.</p>
-      </div>
-      
-      <div class="content-box">
-        <p>Real-time data integration is the next step. By connecting this model to a simulated data stream from the MAGIC telescope, we aim to test real-time classification scenarios. The challenge lies not just in the speed of inference, but also in gracefully handling noisy or incomplete data. This requires additional safeguards like confidence thresholds and anomaly detection subsystems.</p>
-      </div>
-      
-      <div class="content-box">
-        <p>From a product standpoint, the application can be integrated into a larger dashboard for astrophysics research teams. With clear visualizations, toggleable model settings, and download capabilities, it offers an intuitive experience even for non-technical users. The frontend design prioritizes readability, accessibility, and aesthetic coherence with the scientific nature of the project.</p>
-      </div>
-      
-      <div class="content-box">
-        <p>In conclusion, this project serves as a testament to the synergy between data science and astrophysics. Through rigorous modeling, interpretability tools, and thoughtful design, we've laid a foundation for future extensions. Our ambition is to take this from a static analysis to a dynamic observatory tool capable of contributing real insights to the scientific community.</p>
-      </div>
-      
-  
+      <p>Welcome to Analysis Gamma — your dynamic interface for exploring the MAGIC Gamma Telescope data using machine learning. Each section below walks through different phases of our analysis, from understanding the physics behind the features to advanced model interpretability.</p>
+    </div>
+    <div class="content-box">
+      <p>The MAGIC Gamma Telescope project represents a union of astrophysical instrumentation and machine learning. By leveraging classification algorithms, we aim to differentiate gamma-ray-induced atmospheric showers from background hadron showers, which often produce visually similar results. This is not only a classification problem but a scientific one, with far-reaching implications for understanding dark matter, cosmic rays, and high-energy particles from deep space.</p>
+    </div>
+    <div class="content-box">
+      <p>To understand the data, it's important to recognize that each feature corresponds to physical phenomena. For example, 'width' and 'length' correlate with the spatial distribution of light, while parameters like 'skewness' and 'kurtosis' tell us about asymmetry and concentration. Understanding these physical implications allows us to approach machine learning from a more informed and intuitive perspective, which often leads to better models.</p>
+    </div>
+    <div class="content-box">
+      <p>We utilized cross-validation to rigorously assess model performance. A stratified k-fold strategy ensures that each fold preserves the percentage of samples for each class. This methodology helps in estimating generalization error and reduces the risk of biased evaluation. Additionally, model stability was monitored by observing variance in metrics across folds, providing insights into potential overfitting or underfitting issues.</p>
+    </div>
+    <div class="content-box">
+      <p>One of the most interesting insights was the feature importance plot derived from the Random Forest model. It revealed that a small subset of features contributes disproportionately to prediction accuracy. This discovery led to feature selection experiments, where we pruned irrelevant variables and even saw a marginal improvement in test accuracy. Less can sometimes be more, especially in noisy datasets.</p>
+    </div>
+    <div class="content-box">
+      <p>We experimented with dimensionality reduction methods like PCA and t-SNE to visualize the structure of the dataset in two dimensions. The PCA plots showed partial class separability, which validated our choice to proceed with supervised learning. Meanwhile, t-SNE offered deeper insight into nonlinear groupings and confirmed that the decision boundary is complex and multidimensional.</p>
+    </div>
+    <div class="content-box">
+      <p>Throughout development, we emphasized reproducibility. All code was version-controlled and pipeline steps were modularized. We used Python, Scikit-learn, Pandas, and Seaborn for exploratory data analysis and model training. Notebook outputs were exported into HTML for sharing, and the model was serialized using joblib for deployment scenarios. Our entire workflow is designed to be transparent and collaborative.</p>
+    </div>
+    <div class="content-box">
+      <p>We also implemented SHAP (SHapley Additive exPlanations) to explain predictions. This is especially useful when analyzing misclassified samples—by tracing the contribution of each feature to the final prediction, we could uncover biases or unexpected interactions. SHAP visualizations added an additional layer of interpretability that is often missing in traditional black-box approaches.</p>
+    </div>
+    <div class="content-box">
+      <p>The dataset was fairly balanced, but we conducted synthetic sampling experiments using SMOTE to test model robustness under imbalanced scenarios. Interestingly, the performance of ensemble classifiers remained strong, while linear models deteriorated significantly. This reinforced our preference for tree-based methods in real-world applications with non-trivial class distributions.</p>
+    </div>
+    <div class="content-box">
+      <p>Each stage of this project, from data cleaning to model evaluation, was documented in a project log. This not only helped maintain clarity during development but also proved invaluable during presentations and handoffs. The log includes timestamps, rationale for decisions, and even discarded experiments—because in science, knowing what didn't work is as important as knowing what did.</p>
+    </div>
+    <div class="content-box">
+      <p>Real-time data integration is the next step. By connecting this model to a simulated data stream from the MAGIC telescope, we aim to test real-time classification scenarios. The challenge lies not just in the speed of inference, but also in gracefully handling noisy or incomplete data. This requires additional safeguards like confidence thresholds and anomaly detection subsystems.</p>
+    </div>
+    <div class="content-box">
+      <p>From a product standpoint, the application can be integrated into a larger dashboard for astrophysics research teams. With clear visualizations, toggleable model settings, and download capabilities, it offers an intuitive experience even for non-technical users. The frontend design prioritizes readability, accessibility, and aesthetic coherence with the scientific nature of the project.</p>
+    </div>
+    <div class="content-box">
+      <p>In conclusion, this project serves as a testament to the synergy between data science and astrophysics. Through rigorous modeling, interpretability tools, and thoughtful design, we've laid a foundation for future extensions. Our ambition is to take this from a static analysis to a dynamic observatory tool capable of contributing real insights to the scientific community.</p>
+    </div>
 
     <div class="fixed-footer-box">
-      <button>Run</button>
+      <button>News</button>
       <button>Data</button>
       <button>Plot</button>
       <button>Info</button>
